@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Car_Game_v1</string>
+    <string name="player_car">player_car</string>
+    <string name="left">⬅️</string>
+    <string name="right">➡️</string>
+</resources>
