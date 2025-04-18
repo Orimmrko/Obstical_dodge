@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Car_Game_v1</string>
     <string name="player_car">player_car</string>
-    <string name="left">⬅️</string>
-    <string name="right">➡️</string>
+    <string name="score">Score: 0</string>
+    <string name="restart">Restart</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
 </resources>

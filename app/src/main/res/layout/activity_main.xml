@@ -1,62 +1,114 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/game_area"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Car centered above the buttons -->
-    <ImageView
-        android:id="@+id/player"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="150dp"
-        android:contentDescription="@string/player_car"
-        android:src="@drawable/car" />
+    <!-- Game Area (used as a container for the car and obstacles) -->
+    <FrameLayout
+        android:id="@+id/game_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/control_area"/>
 
-    <!-- Bottom row with 3 logical columns -->
+    <!-- Controls: Left and Right Buttons -->
     <LinearLayout
         android:id="@+id/control_area"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:background="#333">
+        android:background="#504444">
 
-        <!-- Left column -->
+        <!-- Left Button -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center">
-
             <Button
                 android:id="@+id/button_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/left" />
+                android:text="@string/left"/>
         </LinearLayout>
 
-        <!-- Middle column (empty, car floats above) -->
+        <!-- Empty column (for centering the car) -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:gravity="center" />
+            android:gravity="center"/>
 
-        <!-- Right column -->
+        <!-- Right Button -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:gravity="center">
-
             <Button
                 android:id="@+id/button_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/right" />
+                android:text="@string/right"/>
         </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+
+    <!-- Health: Hearts representing the player's lives, positioned on the top right -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_heart0"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/heart"
+            android:visibility="visible"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_heart1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="8dp"
+            android:src="@drawable/heart"
+            android:visibility="visible"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/main_IMG_heart2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/heart"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+    <!-- Score: Positioned on the top left -->
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/score"
+        android:textSize="18sp"
+        android:textColor="#0F0E0E"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+
+    <!-- Car Image (centered above the controls) -->
+    <ImageView
+        android:id="@+id/player"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:contentDescription="@string/player_car"
+        android:src="@drawable/car" />
+</RelativeLayout>
