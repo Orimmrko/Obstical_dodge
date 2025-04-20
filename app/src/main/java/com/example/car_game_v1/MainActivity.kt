@@ -134,10 +134,8 @@ class MainActivity : AppCompatActivity() {
         // Move each row's obstacles down by one row
         for (row in matrixHeight - 1 downTo 1) {
             for (col in 0 until matrixWidth) {
-                if (gameMatrix[row - 1][col] == 1) {
-                    gameMatrix[row][col] = 1 // Move obstacle down
-                    gameMatrix[row - 1][col] = 0 // Clear the row above
-                }
+                gameMatrix[row][col] = gameMatrix[row - 1][col] // Move obstacle down
+                gameMatrix[row - 1][col] = 0 // Clear the row above
             }
         }
 

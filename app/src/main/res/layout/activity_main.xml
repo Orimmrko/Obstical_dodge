@@ -37,7 +37,12 @@
         </LinearLayout>
 
         <!-- Empty column (for centering the car) -->
-
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center">
+        </LinearLayout>
         <!-- Right Button -->
         <LinearLayout
             android:layout_width="0dp"
