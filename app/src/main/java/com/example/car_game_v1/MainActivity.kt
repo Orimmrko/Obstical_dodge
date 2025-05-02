@@ -1,6 +1,5 @@
 package com.example.car_game_v1
 
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +14,7 @@ import kotlin.random.Random
 import androidx.appcompat.widget.AppCompatImageView
 import android.view.View
 import com.example.car_game_v1.logic.GameManager
+import dev.tomco.a25b_11345a_l05.utilities.SignalManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        SignalManager.init(this)
         findViews()  // Initialize the views
 
         // Initialize the GameManager with the number of hearts
@@ -131,6 +131,9 @@ class MainActivity : AppCompatActivity() {
     private fun moveObstaclesDown() {
         var scoreIncremented = false
 
+        // Stop further processing if the game is paused
+        if (isGamePaused) return
+
         // Move each row's obstacles down by one row
         for (row in matrixHeight - 1 downTo 1) {
             for (col in 0 until matrixWidth) {
@@ -152,10 +155,12 @@ class MainActivity : AppCompatActivity() {
                     gameManager.reduceLife()  // Reduce life when the obstacle hits the car
                     updateHearts()  // Update hearts after collision
                     gameMatrix[matrixHeight - 1][col] = 0 // Remove the obstacle after collision
+                    SignalManager.getInstance().vibrate() // Vibrate on hit
 
                     // If the game is over and no lives are left, stop the game and show Game Over screen
                     if (gameManager.lives == 0 && !isGamePaused) {
                         isGamePaused = true
+                        stopGame()  // Stop the game
                         showGameOverScreen() // Show the end screen when lives are exhausted
                     }
                 }
@@ -165,10 +170,19 @@ class MainActivity : AppCompatActivity() {
         // If the game is over and no lives are left, stop the game and show Game Over screen
         if (gameManager.lives == 0 && !isGamePaused) {
             isGamePaused = true
+            stopGame()  // Stop the game
             showGameOverScreen() // Show the end screen when lives are exhausted
         }
     }
 
+    private fun stopGame() {
+        // Stop the handler from running any more posts (obstacle spawning/moving)
+        handler.removeCallbacksAndMessages(null)
+
+        // Disable the buttons to prevent movement
+        buttonLeft.isEnabled = false
+        buttonRight.isEnabled = false
+    }
 
     private fun moveCarLeft() {
         // Clear the current car position in the game matrix
@@ -228,7 +242,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     @SuppressLint("SetTextI18n")
     private fun updateScore() {
         scoreText.text = "Score: $score" // Update the score TextView
@@ -244,8 +257,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish() // Finish MainActivity so the user can't go back to the game screen
     }
-
-
-
-
 }
