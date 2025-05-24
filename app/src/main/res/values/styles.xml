@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App theme -->
+    <style name="Theme.CarGameV1" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Brand colors -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <!-- Primary text color on top of primaryColor -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Window background -->
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+</resources>

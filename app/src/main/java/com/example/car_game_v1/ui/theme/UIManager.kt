@@ -7,7 +7,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.car_game_v1.GameOverActivity
+import com.example.car_game_v1.MenuActivity
 
 class UIManager(
     private val scoreText: TextView,
@@ -37,12 +37,11 @@ class UIManager(
     }
 
     /**
-     * Launches the GameOverActivity (passing the final score)
-     * and finishes the current activity.
+     * When the game ends, go straight back to the menu.
      */
     fun showGameOverScreen(score: Int) {
-        val intent = Intent(context, GameOverActivity::class.java).apply {
-            putExtra("SCORE", score)
+        val intent = Intent(context, MenuActivity::class.java).apply {
+            putExtra("EXTRA_RETURNED_SCORE", score)
         }
         context.startActivity(intent)
         if (context is Activity) {
